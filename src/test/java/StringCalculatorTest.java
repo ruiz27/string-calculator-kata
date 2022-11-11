@@ -26,12 +26,22 @@ class StringCalculatorTest {
     @Test
     void givenStringWithNumberWhenAddThenReturnNumber() {
         //given
-        StringCalculator stringCalculator = new StringCalculator();
+        StringCalculator stringCalculator = this.stringCalculator;
         //when
         Integer actual = stringCalculator.add("4");
         //then
         assertThat(actual).isEqualTo(4);
     }
+    @Test
+    void givenStringWithNewLinesWhenAddThenReturnAddedNumber() {
+        //given
+        StringCalculator stringCalculator = this.stringCalculator;
+        //when
+        Integer actual = stringCalculator.add("1\n2,3");
+        //then
+        assertThat(actual).isEqualTo(6);
+    }
+
 
 
 }
