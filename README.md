@@ -1,2 +1,0 @@
-# string-calculator-kata
-kata
