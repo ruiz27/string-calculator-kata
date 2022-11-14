@@ -41,6 +41,18 @@ class StringCalculatorTest {
         //then
         assertThat(actual).isEqualTo(6);
     }
+    @Test
+    void givenStringWithDifferentDelimitersWhenAddThenReturnAddedNumber() {
+        //given
+        StringCalculator stringCalculator = this.stringCalculator;
+        //when
+        Integer actual = stringCalculator.add("//;\n1;2");
+        //then
+        assertThat(actual).isEqualTo(3);
+    }
+
+
+
 
 
 
