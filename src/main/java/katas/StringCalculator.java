@@ -2,6 +2,8 @@ package katas;
 
 
 public class StringCalculator {
+	public static final String REGEX = "\n";
+	public static final String PREFIX = "//";
 
 	public Integer add(String input) {
 		if(input.isEmpty()){
@@ -13,12 +15,12 @@ public class StringCalculator {
 
 	private String[] extractNumbersArray(String input){
 		String delimiter = ",";
-		if(input.startsWith("//")){
-			String[] arrayNumbers = input.split("\n");
+		if(input.startsWith(PREFIX)){
+			String[] arrayNumbers = input.split(REGEX);
 			delimiter = extractDelimiter(arrayNumbers[0]);
 			return arrayNumbers[1].split(delimiter);
 		}else{
-			input = input.replace("\n", delimiter);
+			input = input.replace(REGEX, delimiter);
 			return input.split(delimiter);
 		}
 	}
