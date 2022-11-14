@@ -23,13 +23,8 @@ public class StringCalculator {
 		}
 	}
 
-
 	private String extractDelimiter(String input) {
-		String delimiter = ",";
-		if(input.startsWith("//")){
-			delimiter = input.substring(2,3);
-		}
-		return delimiter;
+		return input.substring(2,3);
 	}
 
 	private int sum(String[] numbersArray) {
