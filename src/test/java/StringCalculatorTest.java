@@ -63,6 +63,15 @@ class StringCalculatorTest {
         }).isInstanceOf(NegativeNumberException.class)
                 .hasMessageContaining("negatives not allowed: -1 -2");
     }
+    @Test
+    void givenStringWithNumbersBiggerThan1000WhenAddThenNoSum() {
+        //given
+        StringCalculator stringCalculator = this.stringCalculator;
+        //when
+        Integer actual = stringCalculator.add("//;\n2;1001");
+        //then
+        assertThat(actual).isEqualTo(2);
+    }
 
 
 

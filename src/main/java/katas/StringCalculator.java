@@ -37,7 +37,9 @@ public class StringCalculator {
 		for (String s : numbersArray) {
 			int number = Integer.parseInt(s);
 			if(number>=0){
-				result = result + Integer.parseInt(s);
+				if(number < 1000){
+					result = result + Integer.parseInt(s);
+				}
 			}else{
 				lisNegativeNumbers = lisNegativeNumbers.concat(" " + s);
 			}
