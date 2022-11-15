@@ -1,6 +1,8 @@
 package katas;
 
 
+import exceptions.NegativeNumberException;
+
 public class StringCalculator {
 	public static final String REGEX = "\n";
 	public static final String PREFIX = "//";
@@ -31,8 +33,17 @@ public class StringCalculator {
 
 	private int sum(String[] numbersArray) {
 		int result = 0;
+		String lisNegativeNumbers = "";
 		for (String s : numbersArray) {
-			result = result + Integer.parseInt(s);
+			int number = Integer.parseInt(s);
+			if(number>=0){
+				result = result + Integer.parseInt(s);
+			}else{
+				lisNegativeNumbers = lisNegativeNumbers.concat(" " + s);
+			}
+		}
+		if(!lisNegativeNumbers.isBlank()){
+			throw new NegativeNumberException(lisNegativeNumbers);
 		}
 		return result;
 	}
