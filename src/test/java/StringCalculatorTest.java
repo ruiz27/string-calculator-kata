@@ -72,6 +72,15 @@ class StringCalculatorTest {
         //then
         assertThat(actual).isEqualTo(2);
     }
+    @Test
+    void givenDelimiterWithBracketsWhenAddThenAddNumber() {
+        //given
+        StringCalculator stringCalculator = this.stringCalculator;
+        //when
+        Integer actual = stringCalculator.add("//[]\n12***3");
+        //then
+        assertThat(actual).isEqualTo(6);
+    }
 
 
 

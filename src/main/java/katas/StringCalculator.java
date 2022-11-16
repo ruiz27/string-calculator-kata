@@ -6,6 +6,8 @@ import exceptions.NegativeNumberException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
@@ -33,7 +35,21 @@ public class StringCalculator {
 	}
 
 	private String extractDelimiter(String input) {
-		return input.substring(2,3);
+		Pattern pattern = Pattern.compile("^//(.*)");
+		Matcher matcher = pattern.matcher(input);
+		if (matcher.find()) {
+			String delimiter = matcher.group(1);
+			if (delimiter.startsWith("[")){
+				pattern = Pattern.compile("\\[(.*?)\\]");
+				matcher = pattern.matcher(delimiter);
+				if (matcher.find()) {
+					return matcher.group(1);
+				}
+			}else{
+				return delimiter;
+			}
+		}
+		return input;
 	}
 
 	private int sum(String[] numbersArray) {
@@ -45,7 +61,7 @@ public class StringCalculator {
 		if(lisNegativeNumbers!=null) {
 			if (lisNegativeNumbers.isEmpty()) {
 				result = Arrays.stream(numbersArray)
-						.map(Integer::parseInt)
+						.map(this::convertToNumber)
 						.filter(majorToZero)
 						.filter(minorTo1000)
 						.reduce(0, Integer::sum);
@@ -66,9 +82,18 @@ public class StringCalculator {
 	private List<Integer> getLisNegativeNumbers(String[] numbersArray) {
 		Predicate<Integer> negativeNum = num -> num<0;
 		return Arrays.stream(numbersArray)
-				.map(Integer::parseInt)
+				.map(this::convertToNumber)
 				.filter(negativeNum)
 				.collect(Collectors.toList());
+	}
+
+	private int convertToNumber(String num){
+		try{
+			return Integer.parseInt(num);
+		}catch(Exception e){
+			// log error
+		}
+		return 0;
 	}
 
 }
