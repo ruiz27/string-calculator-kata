@@ -36,11 +36,11 @@ public class StringCalculator {
         if (input.startsWith(PREFIX)) {
             String[] arrayNumbers = input.split(REGEX);
             defaultDelimiter = extractDelimiter(arrayNumbers[0]);
-            return arrayNumbers[1].split(defaultDelimiter);
+            input = arrayNumbers[1];
         } else {
             input = input.replace(REGEX, defaultDelimiter);
-            return input.split(defaultDelimiter);
         }
+        return input.split(defaultDelimiter);
     }
 
     private String extractDelimiter(String input) {
