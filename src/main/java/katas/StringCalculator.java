@@ -28,7 +28,7 @@ public class StringCalculator {
         String[] numbersArray = extractNumbersFromInput(input);
         validateNegativeNumbers(numbersArray);
 
-        return sum(numbersArray);
+        return sumNumbers(numbersArray);
 
     }
 
@@ -61,7 +61,7 @@ public class StringCalculator {
         return input;
     }
 
-    private int sum(String[] numbersArray) {
+    private int sumNumbers(String[] numbersArray) {
         return Arrays.stream(numbersArray)
                 .map(this::convertToNumber)
                 .filter(majorToZero)
@@ -70,14 +70,14 @@ public class StringCalculator {
     }
 
     private void validateNegativeNumbers(String[] numbersArray) {
-        List<Integer> lisNegativeNumbers = getLisNegativeNumbers(numbersArray);
+        List<Integer> lisNegativeNumbers = getNegativeListNumbers(numbersArray);
         if (lisNegativeNumbers != null && !lisNegativeNumbers.isEmpty()) {
             String message = buildMessageNegativeNumbers(lisNegativeNumbers);
             throw new NegativeNumberException(message);
         }
     }
 
-    private List<Integer> getLisNegativeNumbers(String[] numbersArray) {
+    private List<Integer> getNegativeListNumbers(String[] numbersArray) {
         return Arrays.stream(numbersArray)
                 .map(this::convertToNumber)
                 .filter(negativeNum)
