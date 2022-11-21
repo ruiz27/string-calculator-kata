@@ -12,8 +12,7 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
     public static final String REGEX = "\n";
-    public static final String PREFIX = "//";
-
+    private static final Predicate<String> isSpecialDelimiter = delimiter -> delimiter.startsWith("//");
     private static final Predicate<Integer> majorToZero = num -> num >= 0;
     private static final Predicate<Integer> minorTo1000 = num -> num < 1000;
     private static final Predicate<Integer> negativeNum = majorToZero.negate();
@@ -33,7 +32,7 @@ public class StringCalculator {
     }
 
     private String[] extractNumbersFromInput(String input) {
-        if (input.startsWith(PREFIX)) {
+        if (isSpecialDelimiter.test(input)) {
             String[] arrayNumbers = input.split(REGEX);
             defaultDelimiter = extractDelimiter(arrayNumbers[0]);
             input = arrayNumbers[1];
